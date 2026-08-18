@@ -96,16 +96,16 @@
         <p>Nine adventures and counting. One goal: keep your brain in battle shape.</p>
       </div>
       <div class="game-grid">
-        <article class="game-card"><div class="game-ico" style="--c:#22d3ee">🧩</div><h3>Sudoku</h3><p>Classic number logic with daily grids and progressive difficulty.</p></article>
-        <article class="game-card"><div class="game-ico" style="--c:#a855f7">🔤</div><h3>Word Finder</h3><p>Hunt hidden words, expand your vocabulary, race the clock.</p></article>
-        <article class="game-card"><div class="game-ico" style="--c:#f59e0b">🧮</div><h3>Math Challenge</h3><p>Rapid-fire arithmetic that turns numbers into superpowers.</p></article>
-        <article class="game-card"><div class="game-ico" style="--c:#ef4444">🗼</div><h3>Tower of Hanoi</h3><p>The timeless puzzle of strategy, patience and precision.</p></article>
-        <article class="game-card"><div class="game-ico" style="--c:#34d399">🃏</div><h3>Card Memory</h3><p>Flip, match and train your memory one card at a time.</p></article>
-        <article class="game-card"><div class="game-ico" style="--c:#f472b6">🐾</div><h3>Puzzle Pets</h3><p>Adorable pet puzzles that grow with you through every level.</p></article>
-        <article class="game-card"><div class="game-ico" style="--c:#f97316">🧱</div><h3>Block Puzzle</h3><p>Slide, stack and clear blocks in a fast-paced spatial challenge.</p></article>
-        <article class="game-card"><div class="game-ico" style="--c:#3b82f6">🌀</div><h3>Maze Runner</h3><p>Blaze through twisting mazes — speed, logic and precision.</p></article>
-        <article class="game-card"><div class="game-ico" style="--c:#ef4444">🦁</div><h3>Animal Crush</h3><p>Match adorable critters in a colorful, satisfying combo rush.</p></article>
-        <article class="game-card"><div class="game-ico" style="--c:#22d3ee">🚀</div><h3>More Adventures</h3><p>New quests are in the works. Stay tuned for what's next.</p></article>
+        <article class="game-card" data-game="sudoku"><div class="game-ico" style="--c:#22d3ee">🧩</div><h3>Sudoku</h3><p>Classic number logic with daily grids and progressive difficulty.</p></article>
+        <article class="game-card" data-game="wordfinder"><div class="game-ico" style="--c:#a855f7">🔤</div><h3>Word Finder</h3><p>Hunt hidden words, expand your vocabulary, race the clock.</p></article>
+        <article class="game-card" data-game="math"><div class="game-ico" style="--c:#f59e0b">🧮</div><h3>Math Challenge</h3><p>Rapid-fire arithmetic that turns numbers into superpowers.</p></article>
+        <article class="game-card" data-game="hanoi"><div class="game-ico" style="--c:#ef4444">🗼</div><h3>Tower of Hanoi</h3><p>The timeless puzzle of strategy, patience and precision.</p></article>
+        <article class="game-card" data-game="memory"><div class="game-ico" style="--c:#34d399">🃏</div><h3>Card Memory</h3><p>Flip, match and train your memory one card at a time.</p></article>
+        <article class="game-card" data-game="puzzlepets"><div class="game-ico" style="--c:#f472b6">🐾</div><h3>Puzzle Pets</h3><p>Adorable pet puzzles that grow with you through every level.</p></article>
+        <article class="game-card" data-game="block"><div class="game-ico" style="--c:#f97316">🧱</div><h3>Block Puzzle</h3><p>Slide, stack and clear blocks in a fast-paced spatial challenge.</p></article>
+        <article class="game-card" data-game="maze"><div class="game-ico" style="--c:#3b82f6">🌀</div><h3>Maze Runner</h3><p>Blaze through twisting mazes — speed, logic and precision.</p></article>
+        <article class="game-card" data-game="animalcrush"><div class="game-ico" style="--c:#ef4444">🦁</div><h3>Animal Crush</h3><p>Match adorable critters in a colorful, satisfying combo rush.</p></article>
+        <article class="game-card" data-game="more"><div class="game-ico" style="--c:#22d3ee">🚀</div><h3>More Adventures</h3><p>New quests are in the works. Stay tuned for what's next.</p></article>
       </div>
     </section>
 
@@ -160,6 +160,28 @@
       </div>
     </footer>
   </main>
+
+  <!-- Game Demo Modal -->
+  <div id="game-modal" class="game-modal" aria-hidden="true" role="dialog" aria-modal="true">
+    <div class="game-modal-overlay" tabindex="-1"></div>
+    <div class="game-modal-container" role="document">
+      <header class="game-modal-header">
+        <h2 id="game-modal-title" class="game-modal-title"></h2>
+        <button class="game-modal-close" aria-label="Close demo">
+          <svg viewBox="0 0 24 24" width="24" height="24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round"><path d="M18 6 6 18M6 6l12 12"/></svg>
+        </button>
+      </header>
+      <div class="game-modal-body">
+        <canvas id="game-canvas"></canvas>
+        <div id="game-ui" class="game-ui"></div>
+      </div>
+      <footer class="game-modal-footer">
+        <span id="game-modal-hint" class="game-modal-hint"></span>
+        <button id="game-modal-restart" class="btn btn-ghost btn-sm" style="display:none">Restart</button>
+        <a href="https://play.google.com/store/apps/details?id=com.mantugames.app" class="btn btn-accent btn-sm">Play Full Game</a>
+      </footer>
+    </div>
+  </div>
 
   <script src="script.js"></script>
 </body>
