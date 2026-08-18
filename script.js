@@ -777,7 +777,7 @@
       [tiles[e], tiles[idx]] = [tiles[idx], tiles[e]];
       e = idx;
     }
-    GS = { tiles, empty: 8, moves: 0, win: false, bounce: null, gm: gpos(3, 0.12) };
+    GS = { tiles, empty: e, moves: 0, win: false, bounce: null, gm: gpos(3, 0.12) };
     return {
       render: ppRender,
       down: ppDown
@@ -882,6 +882,7 @@
       grid: Array.from({ length: 8 }, () => Array(8).fill(0)),
       tray: blkNewTray(), sel: null, hover: null, round: 0,
       score: 0, lines: 0, over: false, flash: null,
+      trayX: [], trayY: 0, pc: SZ * 0.045,
       gm: { cell, gap, x0, y0: SZ * 0.07, end: SZ * 0.07 + cell * 8 + 7 * gap }
     };
     return {
