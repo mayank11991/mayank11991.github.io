@@ -227,16 +227,17 @@
     const gs = SZ * 0.62;
     const cg = SZ * 0.01;
     const cell = (gs - cg * 3) / 4;
-    const bw = SZ * 0.085, bh = SZ * 0.13, bgap = SZ * 0.03;
-    const x0 = (SZ - gs - SZ * 0.05 - bw) / 2;
-    const y0 = (SZ - gs) / 2;
+    const bw = SZ * 0.1, bh = SZ * 0.12, bgap = SZ * 0.025;
+    const totalH = gs + SZ * 0.05 + bh;
+    const x0 = (SZ - gs) / 2;
+    const y0 = (SZ - totalH) / 2;
     GS = {
       sol: SU_SOL, board: puzzle.map((r) => r.slice()),
       given: puzzle.map((r) => r.map((v) => v !== 0)),
-      sel: null, moves: 0, errors: 0, win: false, msg: null,
+      sel: null, moves: 0, errors: 0, win: false,
       gm: { cell, gap: cg, x0, y0, end: y0 + cell * 4 + cg * 3 },
-      padX: x0 + gs + SZ * 0.05,
-      padY: (SZ - (bh * 5 + bgap * 4)) / 2,
+      padX: (SZ - (bw * 5 + bgap * 4)) / 2,
+      padY: y0 + gs + SZ * 0.05,
       bw, bh, bgap
     };
     return {
@@ -251,18 +252,15 @@
     const g = s.gm;
     const cell = cellAt(x, y, g, 4);
     if (cell) { s.sel = cell; return; }
-    if (x >= s.padX && x <= s.padX + s.bw && y >= s.padY && y <= s.padY + s.bh * 5 + s.bgap * 4) {
-      const i = clamp(Math.floor((y - s.padY) / (s.bh + s.bgap)), 0, 4);
-      if (!s.sel) { s.sel = null; return; }
+    if (y >= s.padY && y <= s.padY + s.bh && x >= s.padX && x <= s.padX + s.bw * 5 + s.bgap * 4) {
+      const i = clamp(Math.floor((x - s.padX) / (s.bw + s.bgap)), 0, 4);
+      if (!s.sel) return;
       const [r, c] = s.sel;
       if (s.given[r][c]) return;
       const v = i < 4 ? i + 1 : 0;
       s.board[r][c] = v;
       s.moves++;
-      if (v !== 0 && v !== s.sol[r][c]) {
-        s.errors++;
-        s.msg = { t: 1, s: "✗ Not right!", c: "#ef4444" };
-      }
+      if (v !== 0 && v !== s.sol[r][c]) s.errors++;
       let done = true;
       for (let R = 0; R < 4; R++) for (let C = 0; C < 4; C++) if (s.board[R][C] !== s.sol[R][C]) done = false;
       if (done) {
@@ -273,14 +271,12 @@
   };
 
   const suRender = () => {
-    const s = GS;
-    if (s.win) {
-      drawGrid4(s);
-      drawResult("Puzzle Solved!", s.stars, `Moves: ${s.moves} · Mistakes: ${s.errors}`);
+    if (GS.win) {
+      drawGrid4(GS);
+      drawResult("Puzzle Solved!", GS.stars, `Moves: ${GS.moves} · Mistakes: ${GS.errors}`);
       return;
     }
-    drawGrid4(s);
-    drawMsg(s.msg);
+    drawGrid4(GS);
   };
 
   const drawGrid4 = (s) => {
@@ -309,20 +305,10 @@
         }
       }
     }
-    gCtx.strokeStyle = "#4b5b78";
-    gCtx.lineWidth = 2.5;
-    const thickX = g.x0 + 2 * (g.cell + g.gap) - g.gap / 2;
-    const thickY = g.y0 + 2 * (g.cell + g.gap) - g.gap / 2;
-    gCtx.beginPath();
-    gCtx.moveTo(thickX, g.y0 - 6);
-    gCtx.lineTo(thickX, g.y0 + g.cell * 4 + g.gap * 3 + 6);
-    gCtx.moveTo(g.x0 - 6, thickY);
-    gCtx.lineTo(g.x0 + g.cell * 4 + g.gap * 3 + 6, thickY);
-    gCtx.stroke();
 
     const labels = ["1", "2", "3", "4", "✕"];
     for (let i = 0; i < 5; i++) {
-      const x = s.padX, y = s.padY + i * (s.bh + s.bgap);
+      const x = s.padX + i * (s.bw + s.bgap), y = s.padY;
       gCtx.fillStyle = "#182136";
       rr(x, y, s.bw, s.bh, 10);
       gCtx.fill();
@@ -455,14 +441,14 @@
       return;
     }
     wfDrawGrid(s);
-    let cx = SZ / 2;
-    text("FIND:", cx, SZ * 0.955, SZ * 0.03, "#22d3ee");
-    cx += SZ * 0.07;
+    const fs = SZ * 0.028;
+    let cx = SZ * 0.05;
+    text("FIND:", cx, SZ * 0.955, fs, "#22d3ee", "left");
+    cx += gCtx.measureText("FIND:").width + SZ * 0.035;
     for (const e of s.words) {
       const str = (e.found ? "✓ " : "") + e.w;
-      const width = str.length * SZ * 0.024;
-      text(str, cx + width / 2, SZ * 0.955, SZ * 0.03, e.found ? "#34d399" : "#9aa7bd");
-      cx += width + SZ * 0.018;
+      text(str, cx, SZ * 0.955, fs, e.found ? "#34d399" : "#9aa7bd", "left");
+      cx += gCtx.measureText(str).width + SZ * 0.02;
     }
     drawMsg(s.flash);
   };
