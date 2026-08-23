@@ -824,16 +824,49 @@
           gCtx.fillStyle = "#0f1420";
           rr(x, y, m.cell, m.cell, 12);
           gCtx.fill();
+          // Draw paw print in empty slot
+          gCtx.fillStyle = "rgba(34, 211, 238, 0.15)";
+          gCtx.beginPath();
+          gCtx.arc(x + m.cell/2, y + m.cell/2, m.cell * 0.25, 0, Math.PI * 2);
+          gCtx.fill();
           continue;
         }
-        gCtx.fillStyle = "#1c2740";
-        rr(x, y, m.cell, m.cell, 12);
+        // Tile background with gradient
+        const petType = s.tiles[i];
+        const colors = [
+          ["#ff6b6b", "#ee5a24"], // lion - red/orange
+          ["#ffa502", "#ff6348"], // tiger - orange
+          ["#7bed9f", "#2ed573"], // koala - green
+          ["#ff9ff3", "#f368e0"], // pig - pink
+          ["#26de81", "#20bf6b"], // frog - green
+          ["#a55eea", "#8854d0"], // monkey - purple
+          ["#feca57", "#ff9f43"], // cow - yellow
+          ["#00d2d3", "#54a0ff"], // chick - cyan
+        ][petType] || ["#70a1ff", "#4834d4"];
+        
+        const grad = gCtx.createLinearGradient(x, y, x + m.cell, y + m.cell);
+        grad.addColorStop(0, colors[0]);
+        grad.addColorStop(1, colors[1]);
+        gCtx.fillStyle = grad;
+        rr(x + 2, y + 2, m.cell - 4, m.cell - 4, 10);
         gCtx.fill();
+        
+        // Inner glow
+        gCtx.strokeStyle = "rgba(255,255,255,0.3)";
+        gCtx.lineWidth = 2;
+        gCtx.stroke();
+        
         let scale = 1;
         if (s.bounce && s.bounce.idx === i) scale = 1 + s.bounce.t * 0.6;
-        text(PETS[s.tiles[i]], x + m.cell / 2, y + m.cell / 2, m.cell * 0.52 * scale);
+        // Draw pet emoji larger and centered
+        text(PETS[s.tiles[i]], x + m.cell / 2, y + m.cell / 2, m.cell * 0.55 * scale);
       }
     }
+    // Draw moves counter
+    gCtx.fillStyle = "rgba(255,255,255,0.7)";
+    gCtx.font = `600 ${SZ * 0.035}px "Inter", sans-serif`;
+    gCtx.textAlign = "right";
+    gCtx.fillText("Moves: " + s.moves, SZ - SZ * 0.05, SZ * 0.055);
   };
 
   /* ────────────────────────────────────────────
@@ -1111,15 +1144,6 @@
     }
     mzDraw(s, x0, y0, cell);
     text("STEPS " + s.steps, SZ / 2, SZ * 0.055, SZ * 0.032, "#9aa7bd");
-    const cx = SZ * 0.13, cy = SZ * 0.86, bs = SZ * 0.075, g2 = SZ * 0.02;
-    const btns = [["▲", 0, -1, cx, cy - bs - g2], ["▼", 0, 1, cx, cy + bs + g2], ["◀", -1, 0, cx - bs - g2, cy], ["▶", 1, 0, cx + bs + g2, cy]];
-    for (const [sym, dr, dc, bx, by] of btns) {
-      gCtx.fillStyle = "rgba(255,255,255,0.07)";
-      gCtx.beginPath();
-      gCtx.arc(bx, by, bs * 0.85, 0, Math.PI * 2);
-      gCtx.fill();
-      text(sym, bx, by, bs * 0.7, "#9aa7bd");
-    }
     drawMsg(s.msg);
   };
 
