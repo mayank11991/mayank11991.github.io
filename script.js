@@ -135,41 +135,57 @@
   /* ────────────────────────────────────────────────────────────────
      GAME DEMO MODALS
      ──────────────────────────────────────────────────────────────── */
-  const modalEl = document.getElementById("game-modal");
-  const gCanvas = document.getElementById("game-canvas");
-  const gCtx = gCanvas.getContext("2d");
-  const titleEl = document.getElementById("game-modal-title");
-  const hintEl = document.getElementById("game-modal-hint");
-  const restartBtn = document.getElementById("game-modal-restart");
+  window.addEventListener("scroll", onScroll, { passive: true });
+  onScroll();
 
-  let modalOpen = false;
-  let currentKey = null;
-  let current = null;
-  let GS = null;
-  let SZ = 0;
-  let lastT = performance.now();
+  /* ────────────────────────────────────────────────────────────────
+     GAME DEMO MODALS
+     ──────────────────────────────────────────────────────────────── */
+  function initGameModal() {
+    const modalEl = document.getElementById("game-modal");
+    const gCanvas = document.getElementById("game-canvas");
+    const titleEl = document.getElementById("game-modal-title");
+    const hintEl = document.getElementById("game-modal-hint");
+    const restartBtn = document.getElementById("game-modal-restart");
 
-  /* ── Drawing helpers ─────────────────────── */
-  const rr = (x, y, w, h, r) => {
-    const rad = Math.min(r, w / 2, h / 2);
-    gCtx.beginPath();
-    gCtx.moveTo(x + rad, y);
-    gCtx.arcTo(x + w, y, x + w, y + h, rad);
-    gCtx.arcTo(x + w, y + h, x, y + h, rad);
-    gCtx.arcTo(x, y + h, x, y, rad);
-    gCtx.arcTo(x, y, x + w, y, rad);
-    gCtx.closePath();
-  };
+    if (!modalEl || !gCanvas || !titleEl || !hintEl || !restartBtn) {
+      if (document.readyState === "loading") {
+        document.addEventListener("DOMContentLoaded", initGameModal);
+      } else {
+        setTimeout(initGameModal, 100);
+      }
+      return;
+    }
 
-  const text = (s, x, y, size, color = "#e7ecf5", align = "center", weight = 600) => {
-    gCtx.font = `${weight} ${size}px "Inter", -apple-system, "Segoe UI Emoji", "Noto Color Emoji", sans-serif`;
-    gCtx.fillStyle = color;
-    gCtx.textAlign = align;
-    gCtx.textBaseline = "middle";
-    gCtx.fillText(s, x, y);
-  };
+    const gCtx = gCanvas.getContext("2d");
+    let modalOpen = false;
+    let currentKey = null;
+    let current = null;
+    let GS = null;
+    let SZ = 0;
+    let lastT = performance.now();
 
-  const clamp = (v, lo, hi) => Math.max(lo, Math.min(hi, v));
+    /* ── Drawing helpers ─────────────────────── */
+    const rr = (x, y, w, h, r) => {
+      const rad = Math.min(r, w / 2, h / 2);
+      gCtx.beginPath();
+      gCtx.moveTo(x + rad, y);
+      gCtx.arcTo(x + w, y, x + w, y + h, rad);
+      gCtx.arcTo(x + w, y + h, x, y + h, rad);
+      gCtx.arcTo(x, y + h, x, y, rad);
+      gCtx.arcTo(x, y, x + w, y, rad);
+      gCtx.closePath();
+    };
+
+    const text = (s, x, y, size, color = "#e7ecf5", align = "center", weight = 600) => {
+      gCtx.font = `${weight} ${size}px "Inter", -apple-system, "Segoe UI Emoji", "Noto Color Emoji", sans-serif`;
+      gCtx.fillStyle = color;
+      gCtx.textAlign = align;
+      gCtx.textBaseline = "middle";
+      gCtx.fillText(s, x, y);
+    };
+
+    const clamp = (v, lo, hi) => Math.max(lo, Math.min(hi, v));
 
   const shuffle = (a) => {
     for (let i = a.length - 1; i > 0; i--) {
@@ -1468,4 +1484,11 @@
     requestAnimationFrame(demoLoop);
   };
   requestAnimationFrame(demoLoop);
+}
+
+if (document.readyState === "loading") {
+  document.addEventListener("DOMContentLoaded", initGameModal);
+} else {
+  initGameModal();
+}
 })();
