@@ -80,8 +80,42 @@
   const menu = document.querySelector(".menu");
   burger.addEventListener("click", () => menu.classList.toggle("open"));
 
-  const sections = [...document.querySelectorAll("section[id]")];
+  // Smooth scroll for anchor links
+  menuLinks.forEach((link) => {
+    link.addEventListener("click", (e) => {
+      const href = link.getAttribute("href");
+      if (href && href.startsWith("#")) {
+        e.preventDefault();
+        const target = document.querySelector(href);
+        if (target) {
+          target.scrollIntoView({ behavior: "smooth", block: "start" });
+          history.pushState(null, "", href);
+        }
+        menu.classList.remove("open");
+      } else if (href && href.includes("#")) {
+        // External page with anchor - let browser handle it
+        menu.classList.remove("open");
+      }
+    });
+  });
+
+  // Also handle num-nav links
   const numLinks = [...document.querySelectorAll(".num")];
+  numLinks.forEach((link) => {
+    link.addEventListener("click", (e) => {
+      const href = link.getAttribute("href");
+      if (href && href.startsWith("#")) {
+        e.preventDefault();
+        const target = document.querySelector(href);
+        if (target) {
+          target.scrollIntoView({ behavior: "smooth", block: "start" });
+          history.pushState(null, "", href);
+        }
+      }
+    });
+  });
+
+  const sections = [...document.querySelectorAll("section[id]")];
   const menuLinks = [...document.querySelectorAll(".menu-link")];
   const sectionIds = sections.map((s) => s.id);
 
@@ -530,7 +564,7 @@
     const s = GS;
     if (s.over) return;
     const bw = SZ * 0.4, bh = SZ * 0.1, gap = SZ * 0.04;
-    const x0 = (SZ - bw) / 2, y0 = SZ * 0.52;
+    const x0 = (SZ - (bw * 2 + gap)) / 2, y0 = SZ * 0.52;
     for (let i = 0; i < 4; i++) {
       const bx = x0 + (i % 2) * (bw + gap);
       const by = y0 + Math.floor(i / 2) * (bh + gap);
@@ -569,7 +603,7 @@
     text("= ?", SZ / 2, SZ * 0.46, SZ * 0.055, "#22d3ee");
 
     const bw = SZ * 0.4, bh = SZ * 0.1, gap = SZ * 0.04;
-    const x0 = (SZ - bw) / 2, y0 = SZ * 0.52;
+    const x0 = (SZ - (bw * 2 + gap)) / 2, y0 = SZ * 0.52;
     for (let i = 0; i < 4; i++) {
       const bx = x0 + (i % 2) * (bw + gap);
       const by = y0 + Math.floor(i / 2) * (bh + gap);
@@ -1339,11 +1373,13 @@
   const sizeCanvas = () => {
     const body = modalEl.querySelector(".game-modal-body");
     const dpr = window.devicePixelRatio || 1;
-    SZ = Math.max(240, Math.min(body.clientWidth, body.clientHeight));
-    gCanvas.style.width = SZ + "px";
-    gCanvas.style.height = SZ + "px";
-    gCanvas.width = Math.round(SZ * dpr);
-    gCanvas.height = Math.round(SZ * dpr);
+    // Canvas now uses width: 100% and aspect-ratio: 1/1 via CSS
+    // We just need to set the internal resolution for crisp rendering
+    const rect = gCanvas.getBoundingClientRect();
+    const displaySize = Math.max(240, Math.min(rect.width, rect.height));
+    gCanvas.width = Math.round(displaySize * dpr);
+    gCanvas.height = Math.round(displaySize * dpr);
+    SZ = displaySize; // Keep SZ in sync for render functions
   };
 
   const getP = (e) => {
