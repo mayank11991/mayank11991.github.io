@@ -46,7 +46,7 @@
         vy: (Math.random() - 0.5) * 0.4,
         char: FLOATER_CHARS[Math.floor(Math.random() * FLOATER_CHARS.length)],
         size: Math.random() * 24 + 18,
-        opacity: Math.random() * 0.15 + 0.05,
+        opacity: Math.random() * 0.15 + 0.09,
         rotation: Math.random() * Math.PI * 2,
         rotSpeed: (Math.random() - 0.5) * 0.003,
         alphaPhase: Math.random() * Math.PI * 2,
