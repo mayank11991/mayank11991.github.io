@@ -78,31 +78,88 @@
 
   const burger = document.querySelector(".burger");
   const menu = document.querySelector(".menu");
-  const searchBtn = document.querySelector(".search-btn");
+  const searchBtn = document.querySelector("#searchBtn");
+  const searchPanel = document.querySelector("#searchPanel");
+  const searchInput = document.querySelector("#searchInput");
+  const searchClose = document.querySelector("#searchClose");
+  const searchResults = document.querySelector("#searchResults");
   burger.addEventListener("click", () => menu.classList.toggle("open"));
-  searchBtn.addEventListener("click", () => {
-    const query = prompt("Search games (Sudoku, Memory, Maze, Word Finder, Math, Block Puzzle, Maze, Hanoi, Animal Crush, Puzzle Pets):");
-    if (query) {
-      const key = query.toLowerCase().trim();
-      const gameMap = {
-        sudoku: "sudoku", sudoku: "sudoku",
-        memory: "memory", card: "memory",
-        maze: "maze", maze: "maze",
-        word: "wordfinder", wordfinder: "wordfinder", finder: "wordfinder",
-        math: "math", challenge: "math",
-        block: "block", puzzle: "block",
-        hanoi: "hanoi", tower: "hanoi",
-        animal: "animalcrush", crush: "animalcrush",
-        pet: "puzzlepets", puzzlepets: "puzzlepets", pet: "puzzlepets",
-      };
-      const gameKey = Object.keys(gameMap).find(k => key.includes(k));
-      if (gameKey && GAMES[gameMap[gameKey]]) {
-        openGame(gameMap[gameKey]);
-      } else {
-        alert("Game not found. Try: Sudoku, Memory, Maze, Word Finder, Math, Block Puzzle, Hanoi, Animal Crush, Puzzle Pets");
-      }
-    }
+
+  // Search panel slider
+  const GAMES_LIST = [
+    { key: "sudoku", name: "Sudoku", hint: "Fill each row, column and 2×2 box with 1–4.", icon: "🧩", color: "#22d3ee" },
+    { key: "memory", name: "Card Memory", hint: "Flip two cards at a time and match all pairs.", icon: "🃏", color: "#34d399" },
+    { key: "maze", name: "Maze Runner", hint: "Reach the flag! Use arrow keys, WASD or swipe.", icon: "🌀", color: "#3b82f6" },
+    { key: "wordfinder", name: "Word Finder", hint: "Find the hidden words — drag across letters.", icon: "🔤", color: "#a855f7" },
+    { key: "math", name: "Math Challenge", hint: "Answer as many as you can in 45 seconds!", icon: "🧮", color: "#f59e0b" },
+    { key: "hanoi", name: "Tower of Hanoi", hint: "Move all disks to the right peg. Big disks can't sit on small ones.", icon: "🗼", color: "#ef4444" },
+    { key: "puzzlepets", name: "Puzzle Pets", hint: "Slide the pets to restore the picture.", icon: "🐾", color: "#f472b6" },
+    { key: "block", name: "Block Puzzle", hint: "Pick a piece, place it on the grid, clear rows and columns!", icon: "🧱", color: "#f97316" },
+  ];
+
+  function openSearchPanel() {
+    searchPanel.classList.add("open");
+    searchPanel.setAttribute("aria-hidden", "false");
+    searchInput.focus();
+    renderSearchResults("");
+    document.body.style.overflow = "hidden";
+  }
+
+  function closeSearchPanel() {
+    searchPanel.classList.remove("open");
+    searchPanel.setAttribute("aria-hidden", "true");
+    searchInput.value = "";
+    renderSearchResults("");
+    document.body.style.overflow = "";
+  }
+
+  function renderSearchResults(query) {
+    const q = query.toLowerCase().trim();
+    const filtered = q
+      ? GAMES_LIST.filter(g => g.name.toLowerCase().includes(q) || g.key.includes(q))
+      : GAMES_LIST;
+    searchResults.innerHTML = filtered.length
+      ? filtered.map(g => `
+        <button class="search-result-item" data-game="${g.key}" style="--icon-color: ${g.color};">
+          <span class="search-result-icon" style="background: linear-gradient(135deg, ${g.color}, ${adjustColor(g.color, -30)})">
+            ${g.icon}
+          </span>
+          <div class="search-result-info">
+            <div class="search-result-name">${g.name}</div>
+            <div class="search-result-hint">${g.hint}</div>
+          </div>
+        </button>
+      `).join("")
+      : '<div class="search-empty">No games found</div>';
+
+    // Attach click handlers
+    searchResults.querySelectorAll(".search-result-item").forEach(btn => {
+      btn.addEventListener("click", () => {
+        openGame(btn.dataset.game);
+        closeSearchPanel();
+      });
+    });
+  }
+
+  // Helper to darken color
+  function adjustColor(hex, amount) {
+    const num = parseInt(hex.replace("#", ""), 16);
+    const r = Math.max(0, Math.min(255, (num >> 16) + amount));
+    const g = Math.max(0, Math.min(255, ((num >> 8) & 0x00FF) + amount));
+    const b = Math.max(0, Math.min(255, (num & 0x0000FF) + amount));
+    return "#" + ((1 << 24) + (r << 16) + (g << 8) + b).toString(16).slice(1);
+  }
+
+  searchBtn.addEventListener("click", openSearchPanel);
+  searchClose.addEventListener("click", closeSearchPanel);
+  searchPanel.addEventListener("click", (e) => {
+    if (e.target === searchPanel) closeSearchPanel();
   });
+  searchInput.addEventListener("input", (e) => renderSearchResults(e.target.value));
+  searchInput.addEventListener("keydown", (e) => {
+    if (e.key === "Escape") closeSearchPanel();
+  });
+  searchClose.addEventListener("click", closeSearchPanel);
 
   const sections = [...document.querySelectorAll("section[id]")];
   const numLinks = [...document.querySelectorAll(".num")];
