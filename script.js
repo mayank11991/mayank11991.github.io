@@ -6,6 +6,22 @@
   let w = 0;
   let h = 0;
 
+  // Floating puzzle/number/alphabet elements
+  const floaters = [];
+  const FLOATER_CHARS = [
+    // Puzzle pieces
+    "🧩", "🧩", "🧩",
+    // Numbers
+    "1", "2", "3", "4", "5", "6", "7", "8", "9", "0",
+    // Alphabets
+    "A", "B", "C", "D", "E", "F", "G", "H", "I", "J", "K", "L", "M",
+    "N", "O", "P", "Q", "R", "S", "T", "U", "V", "W", "X", "Y", "Z",
+    // Math symbols
+    "+", "−", "×", "÷", "=", "≠", "≈",
+    // Puzzle icons
+    "🧩", "🔢", "🔤", "🧮", "🧠", "🎯", "🏁", "🧩"
+  ];
+
   const resize = () => {
     w = canvas.width = window.innerWidth;
     h = canvas.height = window.innerHeight;
@@ -18,6 +34,25 @@
       tw: Math.random() * 0.02 + 0.005,
       ph: Math.random() * Math.PI * 2
     }));
+
+    // Initialize floaters
+    const floaterCount = Math.min(60, Math.floor((w * h) / 25000));
+    floaters.length = 0;
+    for (let i = 0; i < floaterCount; i++) {
+      floaters.push({
+        x: Math.random() * w,
+        y: Math.random() * h,
+        vx: (Math.random() - 0.5) * 0.4,
+        vy: (Math.random() - 0.5) * 0.3,
+        char: FLOATER_CHARS[Math.floor(Math.random() * FLOATER_CHARS.length)],
+        size: Math.random() * 20 + 14,
+        opacity: Math.random() * 0.08 + 0.02,
+        rotation: Math.random() * Math.PI * 2,
+        rotSpeed: (Math.random() - 0.5) * 0.002,
+        alphaPhase: Math.random() * Math.PI * 2,
+        alphaSpeed: Math.random() * 0.003 + 0.001
+      });
+    }
   };
 
   const draw = () => {
@@ -29,6 +64,33 @@
       ctx.arc(s.x, s.y, s.r, 0, Math.PI * 2);
       ctx.fillStyle = `rgba(255,255,255,${alpha})`;
       ctx.fill();
+    }
+
+    // Draw floating puzzle/number/alphabet elements
+    for (const f of floaters) {
+      f.x += f.vx;
+      f.y += f.vy;
+      f.rotation += f.rotSpeed;
+      f.alphaPhase += f.alphaSpeed;
+
+      // Wrap around screen edges
+      if (f.x < -50) f.x = w + 50;
+      if (f.x > w + 50) f.x = -50;
+      if (f.y < -50) f.y = h + 50;
+      if (f.y > h + 50) f.y = -50;
+
+      // Pulsing opacity
+      const pulseAlpha = f.opacity * (0.5 + 0.5 * Math.sin(f.alphaPhase));
+
+      ctx.save();
+      ctx.translate(f.x, f.y);
+      ctx.rotate(f.rotation);
+      ctx.globalAlpha = pulseAlpha;
+      ctx.font = `${f.size}px "Segoe UI Emoji", "Apple Color Emoji", "Noto Color Emoji", sans-serif`;
+      ctx.textAlign = "center";
+      ctx.textBaseline = "middle";
+      ctx.fillText(f.char, 0, 0);
+      ctx.restore();
     }
 
     if (shooting) {
