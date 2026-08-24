@@ -79,13 +79,13 @@
   const burger = document.querySelector(".burger");
   const menu = document.querySelector(".menu");
   const searchBtn = document.querySelector("#searchBtn");
-  const searchPanel = document.querySelector("#searchPanel");
+  const searchWrapper = document.querySelector("#searchWrapper");
   const searchInput = document.querySelector("#searchInput");
   const searchClose = document.querySelector("#searchClose");
   const searchResults = document.querySelector("#searchResults");
-  burger.addEventListener("click", () => menu.classList.toggle("open"));
 
-  // Search panel slider
+  if (!searchBtn || !searchWrapper || !searchInput || !searchClose || !searchResults) return;
+
   const GAMES_LIST = [
     { key: "sudoku", name: "Sudoku", hint: "Fill each row, column and 2×2 box with 1–4.", icon: "🧩", color: "#22d3ee" },
     { key: "memory", name: "Card Memory", hint: "Flip two cards at a time and match all pairs.", icon: "🃏", color: "#34d399" },
@@ -97,20 +97,16 @@
     { key: "block", name: "Block Puzzle", hint: "Pick a piece, place it on the grid, clear rows and columns!", icon: "🧱", color: "#f97316" },
   ];
 
-  function openSearchPanel() {
-    searchPanel.classList.add("open");
-    searchPanel.setAttribute("aria-hidden", "false");
+  function openSearch() {
+    searchWrapper.classList.add("open");
     searchInput.focus();
     renderSearchResults("");
-    document.body.style.overflow = "hidden";
   }
 
-  function closeSearchPanel() {
-    searchPanel.classList.remove("open");
-    searchPanel.setAttribute("aria-hidden", "true");
+  function closeSearch() {
+    searchWrapper.classList.remove("open");
     searchInput.value = "";
     renderSearchResults("");
-    document.body.style.overflow = "";
   }
 
   function renderSearchResults(query) {
@@ -132,16 +128,14 @@
       `).join("")
       : '<div class="search-empty">No games found</div>';
 
-    // Attach click handlers
     searchResults.querySelectorAll(".search-result-item").forEach(btn => {
       btn.addEventListener("click", () => {
         openGame(btn.dataset.game);
-        closeSearchPanel();
+        closeSearch();
       });
     });
   }
 
-  // Helper to darken color
   function adjustColor(hex, amount) {
     const num = parseInt(hex.replace("#", ""), 16);
     const r = Math.max(0, Math.min(255, (num >> 16) + amount));
@@ -150,16 +144,35 @@
     return "#" + ((1 << 24) + (r << 16) + (g << 8) + b).toString(16).slice(1);
   }
 
-  searchBtn.addEventListener("click", openSearchPanel);
-  searchClose.addEventListener("click", closeSearchPanel);
-  searchPanel.addEventListener("click", (e) => {
-    if (e.target === searchPanel) closeSearchPanel();
+  searchBtn.addEventListener("click", (e) => {
+    e.stopPropagation();
+    searchWrapper.classList.toggle("open");
+    if (searchWrapper.classList.contains("open")) {
+      searchInput.focus();
+      renderSearchResults("");
+    } else {
+      searchInput.value = "";
+      renderSearchResults("");
+    }
   });
+
+  document.addEventListener("click", (e) => {
+    if (!e.target.closest("#searchWrapper")) {
+      searchWrapper.classList.remove("open");
+    }
+  });
+
+  document.querySelector("#searchClose").addEventListener("click", (e) => {
+    e.stopPropagation();
+    searchWrapper.classList.remove("open");
+    searchInput.value = "";
+    renderSearchResults("");
+  });
+
   searchInput.addEventListener("input", (e) => renderSearchResults(e.target.value));
   searchInput.addEventListener("keydown", (e) => {
-    if (e.key === "Escape") closeSearchPanel();
+    if (e.key === "Escape") searchWrapper.classList.remove("open");
   });
-  searchClose.addEventListener("click", closeSearchPanel);
 
   const sections = [...document.querySelectorAll("section[id]")];
   const numLinks = [...document.querySelectorAll(".num")];
