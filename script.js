@@ -78,7 +78,31 @@
 
   const burger = document.querySelector(".burger");
   const menu = document.querySelector(".menu");
+  const searchBtn = document.querySelector(".search-btn");
   burger.addEventListener("click", () => menu.classList.toggle("open"));
+  searchBtn.addEventListener("click", () => {
+    const query = prompt("Search games (Sudoku, Memory, Maze, Word Finder, Math, Block Puzzle, Maze, Hanoi, Animal Crush, Puzzle Pets):");
+    if (query) {
+      const key = query.toLowerCase().trim();
+      const gameMap = {
+        sudoku: "sudoku", sudoku: "sudoku",
+        memory: "memory", card: "memory",
+        maze: "maze", maze: "maze",
+        word: "wordfinder", wordfinder: "wordfinder", finder: "wordfinder",
+        math: "math", challenge: "math",
+        block: "block", puzzle: "block",
+        hanoi: "hanoi", tower: "hanoi",
+        animal: "animalcrush", crush: "animalcrush",
+        pet: "puzzlepets", puzzlepets: "puzzlepets", pet: "puzzlepets",
+      };
+      const gameKey = Object.keys(gameMap).find(k => key.includes(k));
+      if (gameKey && GAMES[gameMap[gameKey]]) {
+        openGame(gameMap[gameKey]);
+      } else {
+        alert("Game not found. Try: Sudoku, Memory, Maze, Word Finder, Math, Block Puzzle, Hanoi, Animal Crush, Puzzle Pets");
+      }
+    }
+  });
 
   const sections = [...document.querySelectorAll("section[id]")];
   const numLinks = [...document.querySelectorAll(".num")];
