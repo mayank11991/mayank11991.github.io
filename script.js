@@ -42,15 +42,15 @@
       floaters.push({
         x: Math.random() * w,
         y: Math.random() * h,
-        vx: (Math.random() - 0.5) * 0.4,
-        vy: (Math.random() - 0.5) * 0.3,
+        vx: (Math.random() - 0.5) * 0.6,
+        vy: (Math.random() - 0.5) * 0.4,
         char: FLOATER_CHARS[Math.floor(Math.random() * FLOATER_CHARS.length)],
-        size: Math.random() * 20 + 14,
-        opacity: Math.random() * 0.08 + 0.02,
+        size: Math.random() * 24 + 18,
+        opacity: Math.random() * 0.15 + 0.05,
         rotation: Math.random() * Math.PI * 2,
-        rotSpeed: (Math.random() - 0.5) * 0.002,
+        rotSpeed: (Math.random() - 0.5) * 0.003,
         alphaPhase: Math.random() * Math.PI * 2,
-        alphaSpeed: Math.random() * 0.003 + 0.001
+        alphaSpeed: Math.random() * 0.004 + 0.002
       });
     }
   };
