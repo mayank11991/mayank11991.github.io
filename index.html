@@ -3,183 +3,201 @@
 <head>
   <meta charset="UTF-8" />
   <meta name="viewport" content="width=device-width, initial-scale=1.0" />
-  <title>Mantu Games — Play. Learn. Explore.</title>
-  <meta name="description" content="Mantu Games is a universe of brain-twisting puzzles, strategy challenges and memory quests. Download on Google Play and dive into the adventure." />
-  <link rel="stylesheet" href="styles.css" />
+  <title>Mantu: Kids Puzzle Games — 11 brain games in one app</title>
+  <meta name="description" content="Mantu is a happy collection of 11 kids puzzle games and brain games: Sudoku, mazes, connect the dots, maths, memory, word search and more. Free on Google Play." />
+  <meta name="theme-color" content="#5AA6FF" />
+  <link rel="icon" type="image/png" href="assets/icon-192.png" />
+  <link rel="apple-touch-icon" href="assets/icon-192.png" />
+  <meta property="og:type" content="website" />
+  <meta property="og:title" content="Mantu: Kids Puzzle Games" />
+  <meta property="og:description" content="11 fun puzzle and brain games for kids in one app. Free on Google Play." />
+  <meta property="og:image" content="https://mayank11991.github.io/assets/og.jpg" />
+  <meta property="og:url" content="https://mayank11991.github.io/" />
+  <meta name="twitter:card" content="summary_large_image" />
   <link rel="preconnect" href="https://fonts.googleapis.com" />
   <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
-  <link href="https://fonts.googleapis.com/css2?family=Orbitron:wght@500;700;900&family=Inter:wght@400;500;600&display=swap" rel="stylesheet" />
+  <link href="https://fonts.googleapis.com/css2?family=Baloo+2:wght@500;600;700;800&family=Lilita+One&display=swap" rel="stylesheet" />
+  <link rel="stylesheet" href="styles.css" />
+  <script type="application/ld+json">
+  {
+    "@context": "https://schema.org",
+    "@type": "MobileApplication",
+    "name": "Mantu: Kids Puzzle Games",
+    "operatingSystem": "Android",
+    "applicationCategory": "GameApplication",
+    "offers": { "@type": "Offer", "price": "0", "priceCurrency": "USD" },
+    "url": "https://play.google.com/store/apps/details?id=com.mantugames.app",
+    "image": "https://mayank11991.github.io/assets/icon-512.png"
+  }
+  </script>
 </head>
 <body>
-  <canvas id="stars" aria-hidden="true"></canvas>
 
   <header class="nav">
-    <div class="nav-inner">
-      <a href="#home" class="logo" aria-label="Mantu Games home">
-        <svg viewBox="0 0 32 32" width="30" height="30" fill="none" xmlns="http://www.w3.org/2000/svg">
-          <rect x="1" y="1" width="30" height="30" rx="8" fill="url(#lg)"/>
-          <defs><linearGradient id="lg" x1="0" y1="0" x2="1" y2="1"><stop offset="0" stop-color="#22d3ee"/><stop offset="1" stop-color="#a855f7"/></linearGradient></defs>
-          <path d="M10 21.5 16 10l6 11.5h-3.2L16 16.4l-2.8 5.1H10Z" fill="#0b0e14"/>
-          <circle cx="11" cy="14" r="1.6" fill="#0b0e14"/>
-          <circle cx="21" cy="14" r="1.6" fill="#0b0e14"/>
-        </svg>
-        <span class="logo-text">MANTU<span>GAMES</span></span>
-      </a>
-
+    <div class="wrap">
+      <a href="#top" class="brand"><img src="assets/icon-192.png" alt="" width="44" height="44" /><span>Mantu</span></a>
       <nav class="menu" aria-label="Primary">
-        <a href="#home" class="menu-link">Home</a>
-        <a href="#games" class="menu-link">Games</a>
-        <a href="#features" class="menu-link">Features</a>
-        <a href="#about" class="menu-link">About</a>
-        <a href="privacy.html" class="menu-link">Privacy Policy</a>
-        <a href="#contact" class="menu-link">Contact</a>
+        <a href="#games">Games</a>
+        <a href="#trailer">Trailer</a>
+        <a href="#features">Features</a>
+        <a href="#parents">Parents</a>
+        <a href="privacy.html">Privacy</a>
       </nav>
-
-      <div class="nav-actions">
-        <a href="https://play.google.com/store/apps/details?id=com.mantugames.app" class="btn btn-accent nav-cta">Play Now</a>
-        <button class="icon-btn burger" aria-label="Menu">
-          <svg viewBox="0 0 24 24" width="22" height="22" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round"><path d="M4 7h16M4 12h16M4 17h10"/></svg>
-        </button>
-      </div>
+      <a class="btn small" href="https://play.google.com/store/apps/details?id=com.mantugames.app">Get the app</a>
     </div>
   </header>
 
-  <ul class="num-nav" aria-label="Sections">
-    <li><a href="#home" data-sec="home" class="num active">01</a></li>
-    <li><a href="#games" data-sec="games" class="num">02</a></li>
-    <li><a href="#features" data-sec="features" class="num">03</a></li>
-    <li><a href="#about" data-sec="about" class="num">04</a></li>
-  </ul>
-
-  <div class="social-nav" aria-label="Social media">
-    <a href="https://youtube.com/@mantugames" aria-label="YouTube"><svg viewBox="0 0 24 24" width="20" height="20" fill="currentColor"><path d="M23.5 6.2a3 3 0 0 0-2.1-2.1C19.5 3.5 12 3.5 12 3.5s-7.5 0-9.4.6A3 3 0 0 0 .5 6.2 31 31 0 0 0 0 12a31 31 0 0 0 .5 5.8 3 3 0 0 0 2.1 2.1c1.9.6 9.4.6 9.4.6s7.5 0 9.4-.6a3 3 0 0 0 2.1-2.1A31 31 0 0 0 24 12a31 31 0 0 0-.5-5.8ZM9.6 15.6V8.4l6.3 3.6Z"/></svg></a>
-    <a href="https://instagram.com/mantugames" aria-label="Instagram"><svg viewBox="0 0 24 24" width="20" height="20" fill="none" stroke="currentColor" stroke-width="2"><rect x="3" y="3" width="18" height="18" rx="5"/><circle cx="12" cy="12" r="4"/><circle cx="17.5" cy="6.5" r="1.2" fill="currentColor" stroke="none"/></svg></a>
-    <a href="https://www.facebook.com/profile.php?id=61593476803298" aria-label="Facebook"><svg viewBox="0 0 24 24" width="20" height="20" fill="currentColor"><path d="M13.5 22v-8h2.7l.4-3.2h-3.1V8.7c0-.9.3-1.6 1.6-1.6h1.7V4.2c-.3 0-1.3-.1-2.5-.1-2.5 0-4.2 1.5-4.2 4.3v2.4H7.4V14h2.7v8h3.4Z"/></svg></a>
-  </div>
-
-  <main>
-    <section id="home" class="hero">
-      <div class="hero-bg" aria-hidden="true">
-        <div class="star-field" aria-hidden="true"></div>
-        <div class="nebula nebula-1"></div>
-        <div class="nebula nebula-2"></div>
-        <div class="nebula nebula-3"></div>
-        <div class="grid-plane"></div>
-        <div class="horizon"></div>
-        <div class="planet"></div>
-      </div>
-
-      <div class="hero-content">
-        <span class="badge">MANTU GAMES STUDIO</span>
-        <h1>PLAY. LEARN. <span class="grad">EXPLORE.</span></h1>
-        <p class="hero-sub">A universe of brain-twisting puzzles, strategy challenges and memory quests — crafted for every player. Sharpen your mind and collect your stars.</p>
-        <div class="hero-cta">
-          <a href="https://play.google.com/store/apps/details?id=com.mantugames.app" class="btn btn-accent btn-lg">Get It On Google Play</a>
-          <a href="#games" class="btn btn-ghost btn-lg">Explore Games</a>
+  <main id="top">
+    <section class="hero">
+      <div class="wrap">
+        <div>
+          <span class="badge">FREE ON GOOGLE PLAY</span>
+          <h1>Puzzle fun with <span class="hl">Mantu</span> the cat!</h1>
+          <p class="lead">11 happy brain games in one app: Sudoku, mazes, connect the dots, maths, memory and more. Easy to start, cleverer every level.</p>
+          <div class="hero-cta">
+            <a class="btn yellow" href="https://play.google.com/store/apps/details?id=com.mantugames.app">
+              <svg viewBox="0 0 24 24" width="24" height="24" aria-hidden="true"><path fill="currentColor" d="M4 2.8v18.4c0 .5.5.8 1 .6l15.6-8.9c.5-.3.5-1 0-1.3L5 2.2c-.5-.2-1 .1-1 .6Z"/></svg>
+              Get it on Google Play
+            </a>
+            <a class="btn green" href="#trailer">Watch trailer</a>
+          </div>
+          <div class="hero-stats">
+            <div class="stat"><strong>11</strong><span>puzzle games</span></div>
+            <div class="stat"><strong>100s</strong><span>of levels</span></div>
+            <div class="stat"><strong>3+</strong><span>PEGI rating</span></div>
+          </div>
         </div>
-        <div class="hero-stats">
-          <div><strong>9+</strong><span>Games</span></div>
-          <div><strong>∞</strong><span>Levels</span></div>
-          <div><strong>100%</strong><span>Free to play</span></div>
+        <div class="hero-art">
+          <div class="phone"><img src="assets/shots/01_dash.jpg" alt="Mantu home screen with all the puzzle games" width="506" height="900" /></div>
+          <img class="hero-cat" src="assets/cat.svg" alt="" />
+          <img class="sparkle s1" src="assets/star_kawaii_filled.svg" alt="" />
+          <img class="sparkle s2" src="assets/star_kawaii_filled.svg" alt="" />
+          <img class="sparkle s3" src="assets/coin.svg" alt="" />
         </div>
       </div>
     </section>
+    <svg class="wave" viewBox="0 0 1440 60" preserveAspectRatio="none" aria-hidden="true"><path fill="#F5F6FA" d="M0 30 C 240 70 480 0 720 25 S 1200 60 1440 20 V60 H0Z"/></svg>
 
     <section id="games" class="section">
-      <div class="section-head">
-        <span class="kicker">02 · Our Universe</span>
-        <h2>Choose Your Quest</h2>
-        <p>Nine adventures and counting. One goal: keep your brain in battle shape.</p>
-      </div>
-      <div class="game-grid">
-        <article class="game-card" data-game="sudoku"><div class="game-ico" style="--c:#22d3ee">🧩</div><h3>Sudoku</h3><p>Classic number logic with daily grids and progressive difficulty.</p></article>
-        <article class="game-card" data-game="wordfinder"><div class="game-ico" style="--c:#a855f7">🔤</div><h3>Word Finder</h3><p>Hunt hidden words, expand your vocabulary, race the clock.</p></article>
-        <article class="game-card" data-game="math"><div class="game-ico" style="--c:#f59e0b">🧮</div><h3>Math Challenge</h3><p>Rapid-fire arithmetic that turns numbers into superpowers.</p></article>
-        <article class="game-card" data-game="hanoi"><div class="game-ico" style="--c:#ef4444">🗼</div><h3>Tower of Hanoi</h3><p>The timeless puzzle of strategy, patience and precision.</p></article>
-        <article class="game-card" data-game="memory"><div class="game-ico" style="--c:#34d399">🃏</div><h3>Card Memory</h3><p>Flip, match and train your memory one card at a time.</p></article>
-        <article class="game-card" data-game="puzzlepets"><div class="game-ico" style="--c:#f472b6">🐾</div><h3>Puzzle Pets</h3><p>Adorable pet puzzles that grow with you through every level.</p></article>
-        <article class="game-card" data-game="block"><div class="game-ico" style="--c:#f97316">🧱</div><h3>Block Puzzle</h3><p>Slide, stack and clear blocks in a fast-paced spatial challenge.</p></article>
-        <article class="game-card" data-game="maze"><div class="game-ico" style="--c:#3b82f6">🌀</div><h3>Maze Runner</h3><p>Blaze through twisting mazes — speed, logic and precision.</p></article>
-        <article class="game-card" data-game="more"><div class="game-ico" style="--c:#22d3ee">🚀</div><h3>More Adventures</h3><p>New quests are in the works. Stay tuned for what's next.</p></article>
-      </div>
-    </section>
-
-    <section id="features" class="section">
-      <div class="section-head">
-        <span class="kicker">03 · The Arsenal</span>
-        <h2>Built For What's Next</h2>
-        <p>Today it's polished gameplay. Tomorrow it gets smarter.</p>
-      </div>
-      <div class="feature-grid">
-        <article class="feature-card"><div class="feat-ico">🎯</div><h3>Adaptive Difficulty <span class="soon">AI</span></h3><p>An intelligent engine that reads your pace and tunes every level to keep you in the flow.</p></article>
-        <article class="feature-card"><div class="feat-ico">💡</div><h3>Smart Hints <span class="soon">RAG</span></h3><p>Context-aware hints generated on demand — help that understands your exact puzzle.</p></article>
-        <article class="feature-card"><div class="feat-ico">📶</div><h3>Offline Ready</h3><p>No signal? No problem. Every adventure plays anywhere, anytime.</p></article>
-        <article class="feature-card"><div class="feat-ico">🏆</div><h3>Stars & Progress</h3><p>Earn stars, track records and watch your brain level up with every session.</p></article>
-        <article class="feature-card"><div class="feat-ico">📈</div><h3>Leaderboards</h3><p>Compete with friends and climb the global ranks across every quest.</p></article>
-        <article class="feature-card"><div class="feat-ico">👨‍👩‍👧</div><h3>Family Friendly</h3><p>Safe, bright and age-appropriate — fun for the whole crew.</p></article>
-      </div>
-    </section>
-
-    <section id="about" class="section">
-      <div class="section-head">
-        <span class="kicker">04 · The Studio</span>
-        <h2>Play. Learn. Explore.</h2>
-        <p>Mantu Games builds playful worlds that make your brain stronger — one puzzle at a time.</p>
-      </div>
-      <div class="about-card">
-        <p>We believe the best games teach without you noticing. Every title in the Mantu Games universe is designed to be instantly fun, endlessly replayable, and quietly educational. We're just getting started — and our next generation of features will bring AI-assisted coaching and smart, retrieval-augmented hints to every quest.</p>
-        <div class="about-cta">
-          <a href="https://play.google.com/store/apps/details?id=com.mantugames.app" class="btn btn-accent">Get It On Google Play</a>
+      <div class="wrap">
+        <div class="section-head">
+          <span class="kicker">11 games, 1 app</span>
+          <h2>Pick a puzzle!</h2>
+          <p>Every game starts easy and grows with you, from little puzzle fans to grown-ups.</p>
+        </div>
+        <div class="game-grid">
+          <article class="game"><img src="assets/games/gi_sudoku.svg" alt="" loading="lazy" /><h3>Sudoku</h3><p>Kid-friendly animal Sudoku that teaches real logic.</p></article>
+          <article class="game"><img src="assets/games/gi_mazerunner.svg" alt="" loading="lazy" /><h3>Maze Adventure</h3><p>Guide the cat through fun-shaped mazes.</p></article>
+          <article class="game"><img src="assets/games/gi_connectdots.svg" alt="" loading="lazy" /><h3>Connect Dots</h3><p>Link matching colours and fill the board.</p></article>
+          <article class="game"><img src="assets/games/gi_arrowlines.svg" alt="" loading="lazy" /><h3>Arrow Lines</h3><p>Slide every arrow out to clear the board.</p></article>
+          <article class="game"><img src="assets/games/gi_mathchallenge.svg" alt="" loading="lazy" /><h3>Math Challenge</h3><p>Quick sums that make maths feel like play.</p></article>
+          <article class="game"><img src="assets/games/gi_cardmemory.svg" alt="" loading="lazy" /><h3>Memory Match</h3><p>Flip the cards and find the pairs.</p></article>
+          <article class="game"><img src="assets/games/gi_wordfinder.svg" alt="" loading="lazy" /><h3>Word Search</h3><p>Spot the hidden words in the letter grid.</p></article>
+          <article class="game"><img src="assets/games/gi_numbermatch.svg" alt="" loading="lazy" /><h3>Number Match</h3><p>Make pairs that add up to 10.</p></article>
+          <article class="game"><img src="assets/games/gi_towerofhanoi.svg" alt="" loading="lazy" /><h3>Tower of Hanoi</h3><p>The classic stacking strategy puzzle.</p></article>
+          <article class="game"><img src="assets/games/gi_blockpuzzle.svg" alt="" loading="lazy" /><h3>Block Stack</h3><p>Slide, stack and clear the blocks.</p></article>
+          <article class="game"><img src="assets/games/gi_puzzlepets.svg" alt="" loading="lazy" /><h3>Puzzle Pets</h3><p>Adorable picture puzzles with pets.</p></article>
         </div>
       </div>
     </section>
 
-    <footer id="contact" class="footer">
-      <div class="footer-inner">
-        <div class="footer-brand">
-          <span class="logo-text">MANTU<span>GAMES</span></span>
-          <p>Play. Learn. Explore.</p>
+    <section class="section shots-band" aria-label="Screenshots">
+      <div class="wrap">
+        <div class="section-head">
+          <span class="kicker">Take a look</span>
+          <h2>Bright, simple, made for small hands</h2>
         </div>
-        <div class="footer-links">
-          <a href="#home">Home</a>
-          <a href="#games">Games</a>
-          <a href="#features">Features</a>
-          <a href="#about">About</a>
-          <a href="privacy.html">Privacy Policy</a>
-          <a href="https://play.google.com/store/apps/details?id=com.mantugames.app">Google Play</a>
-        </div>
-        <div class="footer-contact">
-          <p><a href="mailto:infoatkhoj@gmail.com" style="color: #FF7131; text-decoration: none;">infoatkhoj@gmail.com</a></p>
-          <p>© 2026 Mantu Games. All rights reserved.</p>
+        <div class="shots">
+          <img src="assets/shots/02_maze.jpg" alt="Maze Adventure" loading="lazy" width="506" height="900" />
+          <img src="assets/shots/03_dots.jpg" alt="Connect Dots" loading="lazy" width="506" height="900" />
+          <img src="assets/shots/04_sudoku.jpg" alt="Animal Sudoku" loading="lazy" width="506" height="900" />
+          <img src="assets/shots/05_memory.jpg" alt="Memory Match" loading="lazy" width="506" height="900" />
+          <img src="assets/shots/06_math.jpg" alt="Math Challenge" loading="lazy" width="506" height="900" />
+          <img src="assets/shots/07_word.jpg" alt="Word Search" loading="lazy" width="506" height="900" />
+          <img src="assets/shots/08_arrow.jpg" alt="Arrow Lines" loading="lazy" width="506" height="900" />
         </div>
       </div>
-    </footer>
+    </section>
+
+    <section id="trailer" class="section">
+      <div class="wrap">
+        <div class="section-head">
+          <span class="kicker">Trailer</span>
+          <h2>See Mantu in action</h2>
+        </div>
+        <div class="video">
+          <iframe src="https://www.youtube-nocookie.com/embed/-76iHY5-1Ok?rel=0" title="Mantu: Kids Puzzle Games trailer" loading="lazy"
+                  allow="accelerometer; encrypted-media; gyroscope; picture-in-picture" allowfullscreen></iframe>
+        </div>
+      </div>
+    </section>
+
+    <section id="features" class="section" style="padding-top:0">
+      <div class="wrap">
+        <div class="section-head">
+          <span class="kicker">Why kids love it</span>
+          <h2>Learning that feels like play</h2>
+        </div>
+        <div class="feature-grid">
+          <article class="feature c-lime"><div class="ico">⭐</div><h3>Stars &amp; coins</h3><p>Earn stars on every level and coins to spend in any game.</p></article>
+          <article class="feature c-sky"><div class="ico">🧠</div><h3>Real brain skills</h3><p>Logic, memory, number sense, spelling and problem solving.</p></article>
+          <article class="feature c-pink"><div class="ico">👨‍👩‍👧</div><h3>A profile for everyone</h3><p>Brothers, sisters and grown-ups each keep their own progress.</p></article>
+          <article class="feature c-mint"><div class="ico">📶</div><h3>Play anywhere</h3><p>No sign-up and no account needed. Just open and play.</p></article>
+          <article class="feature c-orange"><div class="ico">🎵</div><h3>Cheerful sounds</h3><p>Happy music and gentle sounds, which you can switch off any time.</p></article>
+          <article class="feature c-yellow"><div class="ico">📈</div><h3>Grows with you</h3><p>Hundreds of levels that start easy and get cleverer.</p></article>
+        </div>
+      </div>
+    </section>
+
+    <section id="parents" class="section" style="padding-top:0">
+      <div class="wrap">
+        <div class="parents">
+          <img src="assets/cat.svg" alt="" />
+          <div>
+            <span class="kicker">For parents</span>
+            <h2 style="margin-top:10px">Made to be safe for kids</h2>
+            <ul>
+              <li>Rated PEGI 3 and designed for Google Play's Families programme.</li>
+              <li>No accounts, no chat, and no personal details asked for.</li>
+              <li>Younger players get child-safe ads only: no personalised ads and no advertising ID.</li>
+              <li>All ads are limited to G-rated, family-friendly content.</li>
+              <li>Purchases always go through Google Play, so parental controls apply.</li>
+            </ul>
+            <p style="margin-top:14px;font-size:16px;color:var(--muted)">Read the full <a href="privacy.html" style="color:var(--blue)">privacy policy</a>.</p>
+          </div>
+        </div>
+      </div>
+    </section>
+
+    <section class="section" style="padding-top:0">
+      <div class="wrap">
+        <div class="cta-band">
+          <h2>Ready for a brain workout?</h2>
+          <p>Download Mantu free and start your first puzzle today.</p>
+          <a class="btn" href="https://play.google.com/store/apps/details?id=com.mantugames.app">
+            <svg viewBox="0 0 24 24" width="24" height="24" aria-hidden="true"><path fill="currentColor" d="M4 2.8v18.4c0 .5.5.8 1 .6l15.6-8.9c.5-.3.5-1 0-1.3L5 2.2c-.5-.2-1 .1-1 .6Z"/></svg>
+            Get it on Google Play
+          </a>
+        </div>
+      </div>
+    </section>
   </main>
 
-  <!-- Game Demo Modal -->
-  <div id="game-modal" class="game-modal" aria-hidden="true" role="dialog" aria-modal="true">
-    <div class="game-modal-overlay" tabindex="-1"></div>
-    <div class="game-modal-container" role="document">
-      <header class="game-modal-header">
-        <h2 id="game-modal-title" class="game-modal-title"></h2>
-        <button class="game-modal-close" aria-label="Close demo">
-          <svg viewBox="0 0 24 24" width="24" height="24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round"><path d="M18 6 6 18M6 6l12 12"/></svg>
-        </button>
-      </header>
-      <div class="game-modal-body">
-        <canvas id="game-canvas"></canvas>
-        <div id="game-ui" class="game-ui"></div>
+  <footer class="footer">
+    <div class="wrap">
+      <div>
+        <a href="#top" class="brand"><img src="assets/icon-192.png" alt="" width="44" height="44" /><span>Mantu Games</span></a>
+        <p>Puzzle games that make learning fun.</p>
       </div>
-      <footer class="game-modal-footer">
-        <span id="game-modal-hint" class="game-modal-hint"></span>
-        <div class="game-modal-actions">
-          <button id="game-modal-restart" class="btn btn-ghost btn-sm" style="display:none">Restart</button>
-          <a href="https://play.google.com/store/apps/details?id=com.mantugames.app" class="btn btn-accent btn-sm">Play Full Game</a>
-        </div>
-      </footer>
+      <nav aria-label="Footer">
+        <a href="#games">Games</a>
+        <a href="#trailer">Trailer</a>
+        <a href="privacy.html">Privacy policy</a>
+        <a href="https://play.google.com/store/apps/details?id=com.mantugames.app">Google Play</a>
+        <a href="mailto:infoatkhoj@gmail.com">infoatkhoj@gmail.com</a>
+      </nav>
+      <p class="fine">© 2026 Mantu Games Studio. Google Play and the Google Play logo are trademarks of Google LLC.</p>
     </div>
-  </div>
-
-  <script src="script.js"></script>
+  </footer>
 </body>
 </html>
