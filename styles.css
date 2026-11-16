@@ -35,7 +35,7 @@ body {
   background: var(--paper-soft);
   overflow-x: hidden;
 }
-img { display: block; max-width: 100%; }
+img { display: block; max-width: 100%; height: auto; }
 a { color: inherit; }
 
 .wrap { max-width: 1160px; margin: 0 auto; padding: 0 20px; }
